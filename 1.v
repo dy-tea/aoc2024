@@ -23,32 +23,32 @@ fn p1(input string) !int {
 		sum += math.abs(l[i] - r[i])
 	}
 
-  return sum
+	return sum
 }
 
 fn p2(input string) !int {
-  lines := os.read_lines(input)!
+	lines := os.read_lines(input)!
 
-  mut sim := map[int]int{}
-  mut l := []int{}
+	mut sim := map[int]int{}
+	mut l := []int{}
 
-  for line in lines {
-    words := line.split('   ')
-    l << strconv.atoi(words[0])!
-    sim[strconv.atoi(words[1])!] += 1 
-  }
+	for line in lines {
+		words := line.split('   ')
+		l << strconv.atoi(words[0])!
+		sim[strconv.atoi(words[1])!] += 1
+	}
 
 	mut rat := 0
 
-  for ll in l {
-    rat += sim[ll] * ll;
-  }
+	for ll in l {
+		rat += sim[ll] * ll
+	}
 
-  return rat
+	return rat
 }
 
 fn main() {
-  input := 'input'
+	input := 'input'
 
 	println('Sum: ${p1(input)!}')
 	println('Rating: ${p2(input)!}')
