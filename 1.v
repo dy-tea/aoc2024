@@ -2,15 +2,8 @@ import os
 import math
 import strconv
 
-fn diff(a int, b int) int {
-	return math.abs(a - b)
-}
-
-fn main() {
-	file := os.read_file('input')!
-	lines := file.split_into_lines()
-
-  // Part 1
+fn p1(input string) !int {
+	lines := os.read_lines(input)!
 
 	mut l := []int{}
 	mut r := []int{}
@@ -27,28 +20,36 @@ fn main() {
 	mut sum := 0
 
 	for i in 0 .. l.len {
-		sum += diff(l[i], r[i])
+		sum += math.abs(l[i] - r[i])
 	}
 
-	println('Sum: ${sum}')
+  return sum
+}
 
-  // Part 2
+fn p2(input string) !int {
+  lines := os.read_lines(input)!
 
-	mut sim := [99999]int{ init: 0 }
+  mut sim := map[int]int{}
+  mut l := []int{}
 
-	for ll in l {
-		for rr in r {
-			if ll == rr {
-				sim[ll] += 1
-			}
-		}
-	}
+  for line in lines {
+    words := line.split('   ')
+    l << strconv.atoi(words[0])!
+    sim[strconv.atoi(words[1])!] += 1 
+  }
 
 	mut rat := 0
 
-	for i, n in sim {
-		rat += i * n
-	}
+  for ll in l {
+    rat += sim[ll] * ll;
+  }
 
-	println('Rating: ${rat}')
+  return rat
+}
+
+fn main() {
+  input := 'input'
+
+	println('Sum: ${p1(input)!}')
+	println('Rating: ${p2(input)!}')
 }
