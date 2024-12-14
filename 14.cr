@@ -22,19 +22,8 @@ def p1
         px += vx
         py += vy
 
-        while px >= WIDTH
-          px -= WIDTH 
-        end
-        while py >= HEIGHT
-          py -= HEIGHT
-        end
-
-        while px < 0
-          px += WIDTH
-        end
-        while py < 0
-          py += HEIGHT
-        end
+        px %= WIDTH
+        py %= HEIGHT
       end
 
       if px < WIDTH // 2
@@ -85,19 +74,8 @@ def p2
       bot[0] += bot[2]
       bot[1] += bot[3]
 
-      while bot[0] < 0
-        bot[0] += WIDTH
-      end
-      while bot[1] < 0
-        bot[1] += HEIGHT
-      end
-
-      while bot[0] >= WIDTH
-        bot[0] -= WIDTH
-      end
-      while bot[1] >= HEIGHT
-        bot[1] -= HEIGHT
-      end
+      bot[0] %= WIDTH
+      bot[1] %= HEIGHT 
 
       botset.add(bot[0] * 100000 + bot[1])
     end
