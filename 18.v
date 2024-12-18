@@ -75,7 +75,7 @@ fn p2(input string) ! {
 
   mut grid := [][]bool{ len: 71, init: []bool{ len: 71, init: false } }
 
-  for i, line in lines {
+  for line in lines {
     x, y := line.split_once(',') or { '', '' }
 
     grid[strconv.atoi(x)!][strconv.atoi(y)!] = true
