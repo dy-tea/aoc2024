@@ -3,19 +3,19 @@ import math
 import strconv
 
 fn print_grid(grid [][]bool) {
-  for i in 0..grid.len {
-    for j in 0..grid[i].len {
-      print(if grid[i][j] {'#'} else {'.'})
-    }
-    print('\n')
-  }
+	for i in 0 .. grid.len {
+		for j in 0 .. grid[i].len {
+			print(if grid[i][j] { '#' } else { '.' })
+		}
+		print('\n')
+	}
 }
 
 fn solve_maze(grid [][]bool, sx int, sy int, ex int, ey int) int {
 	dirs := [[1, 0], [0, -1], [-1, 0], [0, 1]]
 	mut queue := [][]int{}
 	mut visited := map[string]int{}
-	mut min := max_int 
+	mut min := max_int
 
 	queue << [sx, sy, 0]
 	visited['${sx},${sy}'] = 0
@@ -38,7 +38,7 @@ fn solve_maze(grid [][]bool, sx int, sy int, ex int, ey int) int {
 			nx, ny := cx + dirs[i][0], cy + dirs[i][1]
 			if nx >= 0 && ny >= 0 && ny < grid.len && nx < grid[0].len && !grid[nx][ny] {
 				key := '${nx},${ny}'
-        nc := cc + 1
+				nc := cc + 1
 				if key !in visited || visited[key] > nc {
 					visited[key] = nc
 					queue << [nx, ny, nc]
@@ -51,44 +51,44 @@ fn solve_maze(grid [][]bool, sx int, sy int, ex int, ey int) int {
 }
 
 fn p1(input string) ! {
-  lines := os.read_lines(input)!
+	lines := os.read_lines(input)!
 
-  mut grid := [][]bool{ len: 71, init: []bool{ len: 71, init: false } }
+	mut grid := [][]bool{len: 71, init: []bool{len: 71, init: false}}
 
-  for i, line in lines {
-    x, y := line.split_once(',') or { '', '' }
+	for i, line in lines {
+		x, y := line.split_once(',') or { '', '' }
 
-    if i == 1024 {
-      break
-    }
-    
-    grid[strconv.atoi(x)!][strconv.atoi(y)!] = true
-  }
+		if i == 1024 {
+			break
+		}
 
-  print_grid(grid)
+		grid[strconv.atoi(x)!][strconv.atoi(y)!] = true
+	}
 
-  println(solve_maze(grid, 0, 0, 70, 70))
+	print_grid(grid)
+
+	println(solve_maze(grid, 0, 0, 70, 70))
 }
 
 fn p2(input string) ! {
-  lines := os.read_lines(input)!
+	lines := os.read_lines(input)!
 
-  mut grid := [][]bool{ len: 71, init: []bool{ len: 71, init: false } }
+	mut grid := [][]bool{len: 71, init: []bool{len: 71, init: false}}
 
-  for line in lines {
-    x, y := line.split_once(',') or { '', '' }
+	for line in lines {
+		x, y := line.split_once(',') or { '', '' }
 
-    grid[strconv.atoi(x)!][strconv.atoi(y)!] = true
+		grid[strconv.atoi(x)!][strconv.atoi(y)!] = true
 
-    if solve_maze(grid, 0, 0, 70, 70) == max_int {
-      print_grid(grid)
-      println(line)
-      break
-    }
-  }
+		if solve_maze(grid, 0, 0, 70, 70) == max_int {
+			print_grid(grid)
+			println(line)
+			break
+		}
+	}
 }
 
 fn main() {
-  p1('input')! 
-  p2('input')!
+	p1('input')!
+	p2('input')!
 }

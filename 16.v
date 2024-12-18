@@ -186,13 +186,13 @@ fn tile_count(grid []string, sx int, sy int, ex int, ey int) int {
 		for j in 0 .. grid[0].len {
 			key := '${i},${j}'
 			if grid[i][j] == `#` {
-				//print('#')
+				// print('#')
 				print(' ')
 			} else if key in valid_tiles {
 				print('O')
 			} else {
-			   print(' ')
-				//print('.')
+				print(' ')
+				// print('.')
 			}
 		}
 		println('')
